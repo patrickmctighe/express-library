@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  h1 Author: #{author.name}
+
+  p 
+    if author.birth_date && author.death_date
+      | #{author.name} (#{author.birth_date} - #{author.death_date})
+    else if author.birth_date
+      | #{author.name} (#{author.birth_date})
+    else
+      | #{author.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Books
+
+    dl
+      each book in author_books
+        dt
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+
+  hr
+
+  p
+    a(href=author.url+'/delete') Delete author
